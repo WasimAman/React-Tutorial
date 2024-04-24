@@ -5,7 +5,7 @@ function App() {
   return (
     <>
       <Navbar title = "TextUtils"aboutText = "About Us" homeText = "Home"/>
-      <TextFrom heading ="Enter Here"/>
+      <TextFrom heading ="Enter Text Below"/>
     </>
   )
 }

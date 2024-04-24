@@ -1,0 +1,35 @@
+.container{
+    display: flex;
+    justify-content: center;
+    align-items: end;
+}
+
+.btn-box{
+    margin-bottom: 60px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-color: #5B6579;
+    border-radius: 25px;
+}
+.btn-box div{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: .5rem;
+    padding-left: 1rem;
+    padding-right: 1rem;
+    padding-bottom: 1rem;
+    background-color: #5B6579;
+    border-radius: 25px;
+}
+.btn-box div button{
+    padding: .6rem 1.5rem;
+    border: none;
+    outline: none;
+    border-radius: 10px;
+    font-size: 1.3rem;
+    font-weight: 500;
+    cursor: pointer;
+}
