@@ -20,7 +20,7 @@ function TextFrom(props) {
   };
 
   const getNoOfWords = (word)=>{
-    if(text===""){
+    if(word===""){
         return 0;
     }
     return word.trim().split(" ").length;
@@ -80,6 +80,13 @@ function TextFrom(props) {
     setText(text.trim())
   }
 
+  const removeExtraSpace = ()=>{
+    const regex =/ {2,}/g;
+    const words = text.split(regex);
+    console.log(words);
+    setText(words.join(" "));
+  }
+
   const replaceWords = ()=>{
     const word = prompt("Enter word")
     const newWord = prompt("Enter new word")
@@ -120,6 +127,21 @@ function TextFrom(props) {
 
     setText(chars.join(""));
   }
+
+  const copyText = ()=>{
+    const textArea = document.querySelector("textarea");
+    textArea.select();
+    navigator.clipboard.writeText(textArea.value);
+  }
+
+  const pasteText = async () => {
+    try {
+        const text = await navigator.clipboard.readText();
+        setText(text); // Update the state with the copied text
+    } catch (error) {
+        alert('Unable to paste from clipboard:');
+    }
+  }
   return (
     <>
       <div className="container">
@@ -132,7 +154,7 @@ function TextFrom(props) {
             value={text}
             onChange={handleOnChange}
             placeholder="Enter Here"
-            style={{backgroundColor:"#454372",color:"whitesmoke",fontSize:"1.2rem"}}
+            style={{backgroundColor:props.mode==='dark'?'#454372':'white',color:props.mode==='dark'?"whitesmoke":"black",fontSize:"1.2rem"}}
           ></textarea>
         </div>
         <button
@@ -154,7 +176,7 @@ function TextFrom(props) {
           className="btn btn-primary mx-1 my-1"
           onClick={convertSentenceCase}
         >
-          convert to sentenceCase
+          Convert to SentenceCase
         </button>
         <button
           id="submit-btn"
@@ -194,6 +216,13 @@ function TextFrom(props) {
         <button
           id="submit-btn"
           className="btn btn-primary mx-1 my-1"
+          onClick={removeExtraSpace}
+        >
+          Remove Extra Spaces
+        </button>
+        <button
+          id="submit-btn"
+          className="btn btn-primary mx-1 my-1"
           onClick={replaceWords}
         >
           Replace Words
@@ -215,10 +244,25 @@ function TextFrom(props) {
         <button
           id="submit-btn"
           className="btn btn-primary mx-1 my-1"
+          onClick={copyText}
+        >
+          Copy To Clipboard
+        </button>
+        <button
+          id="submit-btn"
+          className="btn btn-primary mx-1 my-1"
+          onClick={pasteText}
+        >
+          Paste From Clipboard
+        </button>
+        <button
+          id="submit-btn"
+          className="btn btn-primary mx-1 my-1"
           onClick={clearText}
         >
           ClearText
         </button>
+        
       </div>
       <div className="container my-3">
         <h1>Summary</h1>
